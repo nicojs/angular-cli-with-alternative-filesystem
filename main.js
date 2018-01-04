@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.conf');
 
@@ -11,7 +12,7 @@ fs.readFile = function (name, optionalArgs, callback) {
     }
     callback(null, `alert('hello world!')`);
   } else {
-    originalReadFile(name, optionalArgs, callback);
+    originalReadFile.apply(fs, [name, optionalArgs, callback]);
   }
 }
 
